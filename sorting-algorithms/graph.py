@@ -1,11 +1,11 @@
 import time
 import random
 import matplotlib.pyplot as plt
-from heap import heap_sort
-from insertion import insertion_sort
-from merge import merge_sort
-from quick import quick_sort
-from selection import selection_sort
+from heap_sort import heap_sort
+from insertion_sort import insertion_sort
+from merge_sort import merge_sort
+from quick_sort import quick_sort
+from selection_sort import selection_sort
 
 import sys
 sys.setrecursionlimit(1000000)
