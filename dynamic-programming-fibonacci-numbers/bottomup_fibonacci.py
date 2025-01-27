@@ -14,5 +14,5 @@ def fibonacci(n):
     return FibArray
 
 # Driver Program
-n = int(input("Enter the value of n: "))
-print(fibonacci(n))
+# n = int(input("Enter the value of n: "))
+# print(fibonacci(n))

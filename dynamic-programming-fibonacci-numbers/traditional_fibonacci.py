@@ -13,6 +13,6 @@ def Fibonacci(n):
             fib_sequence.append(fib_sequence[i-1] + fib_sequence[i-2])
         return fib_sequence
 
-# Driver Program
-n = int(input("Enter the value of n: "))  # User input for nth Fibonacci number
-print(Fibonacci(n))
+ # Driver Program
+# n = int(input("Enter the value of n: "))  # User input for nth Fibonacci number
+# print(Fibonacci(n))

@@ -22,5 +22,5 @@ def fibonacci_up_to_n(n):
     return result
 
 # Driver Program
-n = int(input("Enter the value of n: "))  # User input for nth Fibonacci number
-print(fibonacci_up_to_n(n))
+# n = int(input("Enter the value of n: "))  # User input for nth Fibonacci number
+# print(fibonacci_up_to_n(n))
