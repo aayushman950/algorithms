@@ -1,48 +1,44 @@
 # main.py
-
 import time
 import matplotlib.pyplot as plt
-from traditional_fibonacci import Fibonacci as Fibonacci_iterative
-from memoized_fibonacci import fibonacci_up_to_n as Fibonacci_memoized
-from bottomup_fibonacci import fibonacci as Fibonacci_bottom_up
+from recursion import fib as fib_recursive
+from memoization import fib as fib_memoization, reset_cache
+from bottomup import fib as fib_bottomup
 
-# Measure and plot the runtime for different Fibonacci approaches
-def plot_runtime():
-    n_values = list(range(1, 201))  # Test the function for n = 1 to 20
-    times_iterative = []
-    times_memoized = []
-    times_bottom_up = []
+def measure_time(func, n, reset=False):
+    if reset:
+        reset_cache()  # Reset cache before timing memoization
+    start = time.perf_counter()
+    func(n)
+    return time.perf_counter() - start
 
-    for n in n_values:
-        # Iterative approach
-        start_time = time.time()
-        Fibonacci_iterative(n)
-        end_time = time.time()
-        times_iterative.append(end_time - start_time)
+def main():
+    # Test ranges
+    small_n = list(range(5, 35, 5))    # For recursion (n ≤ 30)
+    large_n = list(range(100, 3001, 200))  # For memoization/bottom-up (n ≤ 2000)
 
-        # Memoized approach
-        start_time = time.time()
-        Fibonacci_memoized(n)
-        end_time = time.time()
-        times_memoized.append(end_time - start_time)
+    # Measure recursive (no reset needed)
+    recursive_times = [measure_time(fib_recursive, n) for n in small_n]
 
-        # Bottom-up approach
-        start_time = time.time()
-        Fibonacci_bottom_up(n)
-        end_time = time.time()
-        times_bottom_up.append(end_time - start_time)
+    # Measure memoization (reset before each run)
+    memo_times = [measure_time(fib_memoization, n, reset=True) for n in large_n]
 
-    # Plotting the results
-    plt.plot(n_values, times_iterative, label='Iterative')
-    plt.plot(n_values, times_memoized, label='Memoized')
-    plt.plot(n_values, times_bottom_up, label='Bottom-Up')
+    # Measure bottom-up (no reset needed)
+    bottomup_times = [measure_time(fib_bottomup, n) for n in large_n]
 
-    plt.title('Fibonacci Sequence Generation Time (Different Approaches)')
-    plt.xlabel('Value of n')
-    plt.ylabel('Execution Time (seconds)')
+    # Plot results
+    plt.figure(figsize=(10, 6))
+    plt.plot(small_n, recursive_times, 'ro-', label='Recursive (O(2^N))')
+    plt.plot(large_n, memo_times, 'g*-', label='Memoization (O(N))')
+    plt.plot(large_n, bottomup_times, 'b^-', label='Bottom-up (O(N))')
+    plt.xlabel('n')
+    plt.ylabel('Time (seconds)')
+    plt.title('Fibonacci Algorithm Time Complexity Comparison')
+    # plt.yscale('log')
     plt.legend()
+    plt.grid(True)
+    plt.savefig('comparison_linearscale.png')
     plt.show()
 
-# Driver Program
 if __name__ == "__main__":
-    plot_runtime()
+    main()
