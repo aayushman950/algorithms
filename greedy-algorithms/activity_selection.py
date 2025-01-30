@@ -16,7 +16,7 @@ def printMaxActivities(s, f):
             selected_activities.append(j)
             i = j
 
-    return selected_activities  # For correctness, though timing doesn't depend on this
+    return selected_activities
 
 # Generate random test cases
 def generate_test_case(n):
